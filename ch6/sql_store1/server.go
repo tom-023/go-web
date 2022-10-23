@@ -17,6 +17,11 @@ import (
 	"fmt"
 
 	_ "github.com/lib/pq"
+	// ライブラリの前に _ をつけるとライブラリ先のinit関数だけを実行する
+	// 今回はpgライブラリのinit関数を実行する
+	// func init() {
+	// 	 sql.Register("postgres", &Driver{})
+	// }
 )
 
 type Post struct {
@@ -28,6 +33,7 @@ type Post struct {
 var Db *sql.DB
 
 // connect to the Db
+// main関数の前に実行される
 func init() {
 	var err error
 	Db, err = sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
